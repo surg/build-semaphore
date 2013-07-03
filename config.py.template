@@ -1,0 +1,6 @@
+{
+	'jenkins': 'https://ci.jenkins-ci.org/',
+	'jobs': ['config-provider-model', 'jenkins_main_trunk', 'libs_svnkit', 'plugin-compat-tester'],
+	# port: 8000 # Uncomment to override http server port
+	# offline: True # Uncomment to suppress jenkins polling (useful for debug)
+}
