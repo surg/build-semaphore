@@ -1,0 +1,4 @@
+{
+	'jenkins': '<jenkins url>',
+	'jobs': [coma-separated list of job names]
+}
