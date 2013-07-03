@@ -1,18 +1,16 @@
 #!/usr/bin/python
+import sys
 from urllib import urlopen
 from datetime import datetime
 import threading
 import re
 
-class Config:
-	jenkins = 'http://mdc3vr1192.tun.c4d.griddynamics.net:40006/jenkins'
-	jobs = ['SDP_3.24.X_TEST_SMOKE_BCOM-RunTest', 'SDP_3.24.X_TEST_SMOKE_MCOM-RunTest', 
-			'SDP_UN_3.24.X_SMOKE_FUNC-RunTest', 'SDP_UN_3.24.X_SMOKE_STUB-RunTest','SDP_3.24.X_BUILD', 'SDP-Functional-Promote_3.24.X-DEPLOY']
+POLL_INTERVAL = 60
 
-def job_stats():
+def job_stats(jenkins, jobs):
 	stats = '{'
-	for j in Config.jobs:
-		url = "%s/job/%s/lastBuild/buildStatus" % (Config.jenkins, j)
+	for j in jobs:
+		url = "%s/job/%s/lastBuild/buildStatus" % (jenkins, j)
 		print "Reading ", url
 		url = urlopen(url).geturl()
 		stats += "\"%s\": \"%s\"," % (j, re.search('48x48/([^.]+)\.', url).group(1))
@@ -20,7 +18,19 @@ def job_stats():
 	print str(datetime.now()), stats
 	with open("statuses.json", "w+") as f: 
 		f.write(stats)
-	threading.Timer(60, job_stats).start()
+	threading.Timer(POLL_INTERVAL, lambda: job_stats(jenkins, jobs)).start()
 
-# start calling f now and every 60 sec thereafter
-job_stats()
+def read_config(config_file_name):
+	config = None
+	with open(config_file_name) as f:
+		config = f.read()
+	cfg = eval(config)
+	return cfg
+
+config_file_name = 'config.py'
+if (len(sys.argv) > 1):
+	config_file_name = sys.argv[1]
+config = read_config(config_file_name)
+
+# Start polling jenkins
+job_stats(config['jenkins'], config['jobs'])
