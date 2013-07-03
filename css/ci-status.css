@@ -1,0 +1,76 @@
+.status-cell {
+	text-align: center;
+	height: 30%;
+	margin: 10px;	
+	width: 48%;
+}
+
+.container-fill { 
+    min-height: 100%;
+    height: 100%;
+    margin-left: 10px;
+    width: 100%;
+}
+
+.row-fill { 
+    min-height: 100%;
+    height: 100%;    
+    margin-left: -10px;
+}
+
+html, body {
+    height: 100%;
+}
+
+h2 {
+	border-radius: 15px;
+}
+.blue {
+	background-color: #89FF88;
+}
+
+.blue_anime {
+	-webkit-animation:blue 5s;
+	-webkit-animation-iteration-count:infinite;
+}
+
+@-webkit-keyframes blue /* Safari and Chrome */
+{
+0%   {background: #89FF88;}
+50%  {background: #59A558;}
+100% {background: #89FF88;}
+}
+
+.red {
+	background-color: #FF0000;
+	color: white;
+}
+
+.red_anime {
+	color: white;
+	-webkit-animation:red 5s;
+	-webkit-animation-iteration-count:infinite;
+}
+
+@-webkit-keyframes red /* Safari and Chrome */
+{
+0%   {background: #FF0000;}
+50%  {background: #980000;}
+100% {background: #FF0000;}
+}
+
+.yellow {
+	background-color: #F6E76C;
+}
+
+.yellow_anime {
+	-webkit-animation:yellow 5s;
+	-webkit-animation-iteration-count:infinite;
+}
+
+@-webkit-keyframes yellow /* Safari and Chrome */
+{
+0%   {background: #F6E76C;}
+50%  {background: #FFB737;}
+100% {background: #F6E76C;}
+}
