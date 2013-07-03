@@ -52,8 +52,10 @@ if (len(sys.argv) > 1):
 config = read_config(config_file_name)
 
 # Start polling jenkins
-job_stats(config['jenkins'], config['jobs'])
-
+if not config.get('offline', False):
+	job_stats(config['jenkins'], config['jobs'])
+else: 
+	print "Running in offline mode"
 # Start simple http server to make html page available via http.
 # This is necessary mostly to allow jquery querying file in the same domain. 
 start_server(config)
