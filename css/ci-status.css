@@ -73,3 +73,19 @@ h2 {
 50%  {background: #FFB737;}
 100% {background: #F6E76C;}
 }
+
+.grey {
+	background-color: #CCCCCC;
+}
+
+.grey_anime {
+	-webkit-animation:grey 5s;
+	-webkit-animation-iteration-count:infinite;
+}
+
+@-webkit-keyframes grey /* Safari and Chrome */
+{
+0%   {background: #CCCCCC;}
+50%  {background: #9C9C9C;}
+100% {background: #CCCCCC;}
+}
