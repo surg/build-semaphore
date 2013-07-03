@@ -20,7 +20,9 @@ def job_stats(jenkins, jobs):
 	print str(datetime.now()), stats
 	with open("statuses.json", "w+") as f: 
 		f.write(stats)
-	threading.Timer(POLL_INTERVAL, lambda: job_stats(jenkins, jobs)).start()
+	thread = threading.Timer(POLL_INTERVAL, lambda: job_stats(jenkins, jobs))
+	thread.daemon = True
+	thread.start()
 
 def read_config(config_file_name):
 	config = None
