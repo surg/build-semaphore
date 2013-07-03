@@ -17,4 +17,4 @@ Note that currently it's not possible to run 2 instances of build_status.py simu
 
 HTTP server is run on port 8000 by default. To change it, add 'port' parameter to the config file.
 
-Status page is then available at ([http://localhost:8000/ci-status.html])
+Status page is then available at (http://localhost:8000/ci-status.html)[http://localhost:8000/ci-status.html]
