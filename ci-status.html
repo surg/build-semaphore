@@ -19,14 +19,21 @@
 			}
 
 			function initJobs(res) {
-				jobs = []
 				var statuses = parseStatuses(res);
+				jobs = Object.keys(statuses)
+				var height = calcHeight(jobs.length)
 		        for (var build in statuses) {
 		          var status = statuses[build];
-		          var div = "<div class='span6 status-cell'><h2 class='" + status + "' style='height: 100%' id='" + build + "'>" + build + "</h2></div>";
+		          var div = "<div class='span6 status-cell' style='height: " + height + "%'>"; 
+		          div += "<h2 class='" + status + "' style='height: 100%' id='" + build + "'>" + build + "</h2>";
+		          div += "</div>";
 		          $("#row").append(div);
-		          jobs.push(build)
 		    	}		    	
+		    }
+
+		    function calcHeight(count) {
+		    	var rows = Math.floor(count / 2) + count % 2;
+		    	return 90 / rows;
 		    }
 
 		    function parseStatuses(res) {
@@ -49,16 +56,11 @@
 		    }
 
 		    function sameJobs(statuses) {
-		    	var new_jobs = []
-		    	for (j in statuses) {
-		    		new_jobs.push(j);
-		    	}
-		    	// console.log("Comparing " + jobs + " to " + new_jobs);
-		    	return JSON.stringify(jobs) == JSON.stringify(new_jobs);
+		    	return JSON.stringify(jobs) == JSON.stringify(Object.keys(statuses));
 		    }
 
 		    function readStatuses(f) {
-				$.get("statuses.json").always(f)
+				$.get("statuses.json?api=" + Math.random()).always(f)
 		    }
 
 		    function jq( myid ) {
