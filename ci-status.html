@@ -38,7 +38,8 @@
 		    }
 
 		    function parseStatuses(res) {
-		    	return eval('(' + res.responseText + ')');
+		    	console.log(res);
+		    	return res;
 		    }
 
 		    function update(res) {		    			    	
@@ -72,9 +73,14 @@
 		    }
 
 		    function readStatuses(f) {
-				$.get("statuses.json?api=" + Math.random()).always(f)
+				$.get("statuses?v=" + Math.random()).success(f).fail(update_failed)
 		    }
 
+		    function update_failed(res) {
+		    	jobs = []
+		    	$("#row").html("<h1>Can't update: " + res.status + "</h1>")
+		    }
+		    
 		    function jq( myid ) {
     			return "#" + myid.replace( /(:|\.|\[|\])/g, "\\$1" ); 
 			}
