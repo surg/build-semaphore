@@ -23,6 +23,7 @@ html, body {
 
 h2 {
 	border-radius: 15px;
+	border: 1px black solid;
 }
 .blue {
 	background-color: #89FF88;
@@ -54,12 +55,12 @@ h2 {
 @-webkit-keyframes red /* Safari and Chrome */
 {
 0%   {background: #FF0000;}
-50%  {background: #980000;}
+50%  {background: #660000;}
 100% {background: #FF0000;}
 }
 
 .yellow {
-	background-color: #F6E76C;
+	background-color: #FFCC00;
 }
 
 .yellow_anime {
@@ -69,9 +70,9 @@ h2 {
 
 @-webkit-keyframes yellow /* Safari and Chrome */
 {
-0%   {background: #F6E76C;}
-50%  {background: #FFB737;}
-100% {background: #F6E76C;}
+0%   {background: #FFCC00;}
+50%  {background: #806600;}
+100% {background: #FFCC00;}
 }
 
 .grey {
@@ -88,4 +89,16 @@ h2 {
 0%   {background: #CCCCCC;}
 50%  {background: #9C9C9C;}
 100% {background: #CCCCCC;}
+}
+
+.common-blue {
+	background: #C2F0C2;
+}
+
+.common-yellow {
+	background: #FFFF99;
+}
+
+.common-red {
+	background: #E0B2B2;
 }

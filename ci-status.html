@@ -25,10 +25,11 @@
 		        for (var build in statuses) {
 		          var status = statuses[build];
 		          var div = "<div class='span6 status-cell' style='height: " + height + "%'>"; 
-		          div += "<h2 class='" + status + "' style='height: 100%' id='" + build + "'>" + build + "</h2>";
+		          div += "<h2 style='height: 100%' id='" + build + "'>" + build + "</h2>";
 		          div += "</div>";
 		          $("#row").append(div);
-		    	}		    	
+		    	}
+		    	updateJobs(statuses);		    	
 		    }
 
 		    function calcHeight(count) {
@@ -43,16 +44,27 @@
 		    function update(res) {		    			    	
 		    	var statuses = parseStatuses(res);
 		    	if (sameJobs(statuses)) {
-		    		console.log("Updating status to: " + JSON.stringify(statuses))
-			        for (var build in statuses) {
-			          var status = statuses[build];
-			          $(jq(build)).attr("class", status);
-			    	} 
+		    		updateJobs(statuses);
 		    	} else {
 		    		console.log("Jobs list changed")
 		    		$("#row").html("");
 		    		initJobs(res)
 		    	}			    	
+		    }
+
+		    function updateJobs(statuses) {
+		    	console.log("Updating status to: " + JSON.stringify(statuses));
+		    	var commonStatus = 'blue';
+		        for (var build in statuses) {
+		          var status = statuses[build];
+		          if (status.indexOf('red') >= 0)
+		          	commonStatus = 'red'
+		          else if (status.indexOf('yellow') >= 0 && commonStatus != 'red')
+		          	commonStatus = 'yellow'
+		          $(jq(build)).attr("class", status);
+		    	} 
+
+		    	$(document.body).attr('class', 'common-' + commonStatus);
 		    }
 
 		    function sameJobs(statuses) {
