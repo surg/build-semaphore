@@ -21,15 +21,10 @@ config = read_config(config_file_name)
 # Start polling jenkins
 if not config.get('offline', False):
 	js = job_stats.JobStats(config['jenkins'], config['jobs'])
-
-	js.to_file(config['jenkins'], config['jobs'])
-	thread = threading.Timer(POLL_INTERVAL, js.to_file)
-	thread.daemon = True
-	thread.start()
 else: 
 	print "Running in offline mode"
 	js = job_stats.OfflineJobStats()
-	
+
 # Start simple http server to make html page available via http.
 # This is necessary mostly to allow jquery querying file in the same domain. 
 SemaphoreServer(js, config.get('port', 8000)).start()

@@ -15,7 +15,7 @@
 
 			function init(res) {
 				initJobs(res);
-				setInterval(function() {readStatuses(update)}, 5000)
+				setInterval(function() {readStatuses(update)}, 10000)
 			}
 
 			function initJobs(res) {
@@ -80,7 +80,7 @@
 		    	jobs = []
 		    	$("#row").html("<h1>Can't update: " + res.status + "</h1>")
 		    }
-		    
+
 		    function jq( myid ) {
     			return "#" + myid.replace( /(:|\.|\[|\])/g, "\\$1" ); 
 			}

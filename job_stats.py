@@ -7,11 +7,12 @@ class JobStats(object):
 		self.jobs = jobs
 	def job_stats(self):
 		stats = '{'
-		for j in jobs:
-			url = "%s/job/%s/lastBuild/buildStatus" % (jenkins, j)
+		for j in self.jobs:
+			url = "%s/job/%s/lastBuild/buildStatus" % (self.jenkins, j)
 			print "Reading ", url
 			url = urlopen(url).geturl()
 			stats += "\"%s\": \"%s\"," % (j, re.search('48x48/([^.]+)\.', url).group(1))
+		stats = stats[0:len(stats) - 1]
 		stats += '}'
 		return stats
 
