@@ -2,6 +2,7 @@ from urllib import urlopen
 import re
 from datetime import datetime
 import json
+from collections import OrderedDict
 
 class JobStats(object):
 	def __init__(self, jenkins, jobs):
@@ -9,7 +10,7 @@ class JobStats(object):
 		self.jobs = jobs
 
 	def job_stats(self):
-		stats = {}
+		stats = OrderedDict()
 		for j in self.jobs:
 			url = "%s/job/%s/lastBuild/buildStatus" % (self.jenkins, j)
 			print "Reading ", url
