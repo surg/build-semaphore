@@ -3,6 +3,7 @@ import sys
 import threading
 from semaphore_server import SemaphoreServer
 import job_stats
+from arduino import Arduino
 
 POLL_INTERVAL = 60
 
@@ -25,6 +26,9 @@ else:
 	print "Running in offline mode"
 	js = job_stats.OfflineJobStats()
 
+listeners = []
+if config.get('arduino', False):
+	listeners.append(Arduino(config['arduino_port']))
 # Start simple http server to make html page available via http.
 # This is necessary mostly to allow jquery querying file in the same domain. 
-SemaphoreServer(js, config.get('port', 8000)).start()
+SemaphoreServer(js, config.get('port', 8000), listeners).start()

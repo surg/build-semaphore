@@ -1,19 +1,20 @@
 from urllib import urlopen
 import re
 from datetime import datetime
+import json
+
 class JobStats(object):
 	def __init__(self, jenkins, jobs):
 		self.jenkins = jenkins
 		self.jobs = jobs
+
 	def job_stats(self):
-		stats = '{'
+		stats = {}
 		for j in self.jobs:
 			url = "%s/job/%s/lastBuild/buildStatus" % (self.jenkins, j)
 			print "Reading ", url
 			url = urlopen(url).geturl()
-			stats += "\"%s\": \"%s\"," % (j, re.search('48x48/([^.]+)\.', url).group(1))
-		stats = stats[0:len(stats) - 1]
-		stats += '}'
+			stats[j] = re.search('48x48/([^.]+)\.', url).group(1)
 		return stats
 
 	def to_file():
@@ -24,4 +25,5 @@ class JobStats(object):
 
 class OfflineJobStats(object):
 	def job_stats(self):
-		return '{"config-provider-model": "blue", "jenkins_main_trunk": "red", "libs_svnkit": "yellow", "plugin-compat-tester": "blue_anime"}'
+		with open('statuses.json', 'r') as f:
+			return json.loads(f.read())
