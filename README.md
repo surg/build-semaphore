@@ -19,8 +19,8 @@ Status page is then available at [http://localhost:8000/ci-status.html](http://l
 Arduino support 
 ===============
 Prerequisites: 
-# [Arduino drivers](http://www.ftdichip.com/Drivers/VCP.htm)
-# pyserial module
+* [Arduino drivers](http://www.ftdichip.com/Drivers/VCP.htm)
+* pyserial module
 
 To enable, edit config file, set 
 ```
