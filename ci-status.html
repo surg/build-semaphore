@@ -22,6 +22,7 @@
 				var statuses = parseStatuses(res);
 				jobs = Object.keys(statuses)
 				var height = calcHeight(jobs.length)
+				$("#row").html("");
 		        for (var build in statuses) {
 		          var status = statuses[build];
 		          var div = "<div class='span6 status-cell' style='height: " + height + "%'>"; 
@@ -47,8 +48,7 @@
 		    	if (sameJobs(statuses)) {
 		    		updateJobs(statuses);
 		    	} else {
-		    		console.log("Jobs list changed")
-		    		$("#row").html("");
+		    		console.log("Jobs list changed")		    		
 		    		initJobs(res)
 		    	}			    	
 		    }
@@ -89,7 +89,7 @@
 	<body>		
 		<div class="container container-fill">
 			<div class="row row-fill" id="row">
-				
+				<h1>Loading...</h1>
 			</div>
 			
 		</div>
